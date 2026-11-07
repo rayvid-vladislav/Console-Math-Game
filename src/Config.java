@@ -10,7 +10,8 @@ public class Config {
     public String bigMonsterIcon;
     public String guardMonsterIcon;
     public String guardBrokenIcon;
-    public Config(int zombies, int vampires, int boardSize, int difficulty, int lives, String playerIcon, String monsterIcon, String bigMonsterIcon, String guardMonsterIcon, String guardBrokenIcon) {
+    public String castleIcon;
+    public Config(int zombies, int vampires, int boardSize, int difficulty, int lives, String playerIcon, String monsterIcon, String bigMonsterIcon, String guardMonsterIcon, String guardBrokenIcon, String castleIcon) {
         this.zombies = zombies;
         this.vampires = vampires;
         this.boardSize = boardSize;
@@ -21,10 +22,11 @@ public class Config {
         this.bigMonsterIcon = bigMonsterIcon;
         this.guardMonsterIcon = guardMonsterIcon;
         this.guardBrokenIcon = guardBrokenIcon;
+        this.castleIcon = castleIcon;
     }
 
     public Config(int zombies, int vampires, int boardSize, int difficulty) {
-        this(zombies, vampires, boardSize, difficulty, 3, "🤺", "🧟", "🧛", "🛡️", "🩻");
+        this(zombies, vampires, boardSize, difficulty, 3, "🤺", "🧟", "🧛", "🛡️", "🩻", "🏰");
     }
 
 }

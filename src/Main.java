@@ -1,11 +1,10 @@
 import java.util.*;
 
-
 public class Main {
 
     static boolean first_fail, fog;
     static int steps, x, y;
-    static String difficulty, castle = "🏰", ans;
+    static String difficulty, ans;
     public static Scanner sc = new Scanner(System.in);
     static Random random = new Random();
     static String[][] board;
@@ -21,8 +20,9 @@ public class Main {
                 medium - поле 5 на 5, 5 маленьких монстров(зомби) и 2 больших(вампир),
                 hard - поле 6 на 6, 10 маленьких монстров(зомби) и 5 больших(вампир),
                 custom - после этого выбора необходимо будет выбрать еще и размер поля(n * n),
-                количество монстров и сложность заданий от 1 до 1 000 000 000(medium = 1000).
-                3.Далее тебе выведется поле, где ты - 🤺, маленький монстр - 🧟, большой монстр - 🧛, замок - 🏰, стражи - 🛡️
+                количество монстров сложность заданий от 1 до 1 000 000 000(medium = 1000),
+                и иконки монстров замка и игрока.
+                3.Далее тебе выведется поле, где ты - 🤺, маленький монстр - 🧟, большой монстр - 🧛, замок - 🏰, стражи - 🛡️.
                 4.Чтобы сделать ход необходимо написать координаты клетки в которую ты хочешь походить:
                 1 координата x - отсчитывается от верхнего левого угла(1, 1) слева направо,
                 2 координата y - отсчитывается от верхнего левого угла(1, 1) сверху вниз.
@@ -74,7 +74,7 @@ public class Main {
             Person player = new Person(random.nextInt(settings.boardSize), settings.boardSize - 1, settings.lives, settings.playerIcon);
             board[player.y][player.x] = player.image;
             int castleX = random.nextInt(settings.boardSize);
-            board[0][castleX] = "🏰";
+            board[0][castleX] = settings.castleIcon;
             if (castleX - 1 >= 0) {
                 GuardMonster g1 = new GuardMonster(settings.guardMonsterIcon, settings.guardBrokenIcon);
                 g1.x = castleX - 1;
@@ -160,7 +160,7 @@ public class Main {
                         board[player.y][player.x] = player.image;
                         System.out.println("Ход корректный; Новые координаты: " + (x + 1) + ", " + (y + 1) + " Жизни: " + player.live + "\nХод номер: " + steps);
                     }
-                    else if (board[y][x].equals(castle)) {
+                    else if (board[y][x].equals(settings.castleIcon)) {
                         if (player.hasKey) {
                             System.out.println("Вы открыли замок ключом и прошли игру! 🥳");
                             break;
@@ -316,7 +316,7 @@ public class Main {
                 return new Config(10, 5, 6, 100000);
 
             case "custom":
-                System.out.println("Введи: зомби вампиры размер сложность жизни иконка игрока иконка монстра иконка большого монстра, иконка стража");
+                System.out.println("Введи: зомби вампиры размер сложность жизни иконка игрока иконка монстра иконка большого монстра, иконка стража, иконку замка");
 
                 System.out.print("Зомби: ");
                 int numOfZombs = readInt();
@@ -343,9 +343,10 @@ public class Main {
                 String gmIcon = sc.next();
                 System.out.print("Иконка сломанного стража: ");
                 String gbmIcon = sc.next();
-
+                System.out.print("Иконка замка: ");
+                String castleIcon = sc.next();
                 sc.nextLine();
-                return new Config(numOfZombs, numOfVamps, boardSize, diff, playerHP, pIcon, mIcon, bmIcon, gmIcon, gbmIcon);
+                return new Config(numOfZombs, numOfVamps, boardSize, diff, playerHP, pIcon, mIcon, bmIcon, gmIcon, gbmIcon, castleIcon);
             default:
                 System.out.println("Ставлю medium по умолчанию");
                 return new Config(5, 2, 5, 1000);
