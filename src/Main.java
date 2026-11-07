@@ -130,12 +130,12 @@ public class Main {
                 monsters.get(randomIndex).hasKey = true;
             }
             System.out.println("Включить туман войны?(Да/Нет)");
-            ans = sc.nextLine().trim().toUpperCase();
+            ans = sc.nextLine().trim().toLowerCase();
             if (ans.isEmpty()) {
                 System.out.println("Ты ничего не ввел!");
                 continue;
             }
-            fog = ans.equals("ДA");
+            fog = ans.equals("да");
             while(true){
                 if(fog){
                     print_board_fog(player);
